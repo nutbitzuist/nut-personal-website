@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>Trailing Stops: ATR vs Percentage vs Chandelier Exit — Leverage100x</title>
+    <meta name="description"
+        content="A deep-dive analysis comparing three trailing stop strategies on XAUUSD EMA crossover systems. Data-driven insights on which method maximizes risk-adjusted returns." />
+    <meta name="author" content="Sarunporn Kongarttakarn (Nut)" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="blog.css" />
+</head>
+
+<body>
+
+    <nav class="navbar scrolled" id="navbar">
+        <div class="container">
+            <a href="../index.html" class="nav-logo">
+                <span class="nav-logo-icon">L×</span>
+                Leverage<span class="text-accent">100x</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="../index.html#about" class="nav-link">About</a>
+                <a href="../index.html#projects" class="nav-link">Projects</a>
+                <a href="index.html" class="nav-link active">Blog</a>
+                <a href="../index.html#trading" class="nav-link">Trading</a>
+                <a href="../index.html#resources" class="nav-link">Resources</a>
+                <a href="../index.html#connect" class="nav-link">Connect</a>
+                <a href="../index.html#connect" class="btn btn-primary nav-cta">Get in Touch</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="blog-post-page">
+        <div class="container">
+            <div class="blog-post-header">
+                <a href="index.html" class="blog-post-back">← Back to all articles</a>
+                <div class="blog-card-meta">
+                    <span class="blog-card-date">Feb 08, 2026</span>
+                    <span class="blog-card-category">Trading</span>
+                </div>
+                <h1>Trailing Stops: ATR vs Percentage vs Chandelier Exit</h1>
+                <div class="blog-post-meta">
+                    <div class="blog-post-author">
+                        <img src="../profile.webp" alt="Nut" />
+                        <span class="blog-post-author-name">Nut (Sarunporn)</span>
+                    </div>
+                    <span class="blog-post-date">12 min read</span>
+                </div>
+            </div>
+
+            <article class="blog-post-content">
+                <p>
+                    One of the most debated topics in systematic trading: <strong>how should you trail your
+                        stops?</strong>
+                    There's no universal answer, but there is data. I ran a comprehensive analysis comparing three
+                    popular
+                    trailing stop methods on my XAUUSD EMA crossover strategy, and the results were illuminating.
+                </p>
+
+                <h2>The Three Contestants</h2>
+
+                <h3>1. ATR Trailing Stop</h3>
+                <p>
+                    The ATR (Average True Range) trailing stop adjusts dynamically based on market volatility.
+                    In high-volatility environments, the stop widens. In low-volatility environments, it tightens.
+                    This is the most adaptive of the three methods.
+                </p>
+                <p>
+                    <strong>How it works:</strong> Once a trade is in profit, the stop is placed at
+                    <code>Price - (ATR × Multiplier)</code> for long trades. The multiplier typically ranges from 1.5 to
+                    3.0.
+                </p>
+
+                <h3>2. Percentage Trailing Stop</h3>
+                <p>
+                    The simplest approach: trail the stop a fixed percentage behind the current price.
+                    If gold moves to $2,000 with a 2% trailing stop, the stop sits at $1,960. Simple, predictable,
+                    and easy to understand.
+                </p>
+                <p>
+                    <strong>How it works:</strong> <code>Stop = Price × (1 - Percentage)</code> for long trades.
+                    Tested at 1%, 2%, 3%, and 4% trailing distances.
+                </p>
+
+                <h3>3. Chandelier Exit</h3>
+                <p>
+                    Named for its hanging nature (like a chandelier from the ceiling), this method trails the stop
+                    from the highest high (for longs) by a multiple of ATR. It combines the volatility-adaptive
+                    nature of ATR with the anchoring to recent price extremes.
+                </p>
+                <p>
+                    <strong>How it works:</strong> <code>Stop = Highest High (N periods) - (ATR × Multiplier)</code>.
+                    Tested with lookback periods of 14, 22 combined with multipliers from 2.0 to 3.5.
+                </p>
+
+                <h2>Test Setup</h2>
+
+                <p>
+                    The baseline strategy is a dual EMA crossover on XAUUSD with a fixed 4% take profit,
+                    which I've been running for several years. I tested each trailing stop method against
+                    this baseline across:
+                </p>
+
+                <ul>
+                    <li><strong>Multiple EMA combinations</strong> (9/21, 12/26, 20/50, 50/200)</li>
+                    <li><strong>Multiple timeframes</strong> (H1, H4, D1)</li>
+                    <li><strong>3 years of data</strong> (2023-2025) covering different market regimes</li>
+                    <li><strong>Various parameter sets</strong> for each trailing stop method</li>
+                </ul>
+
+                <h2>Key Findings</h2>
+
+                <h3>Overall Winner: ATR Trailing Stop</h3>
+                <p>
+                    The ATR trailing stop with a <strong>2.5x multiplier</strong> produced the best
+                    risk-adjusted returns across most EMA combinations and timeframes. Key metrics:
+                </p>
+
+                <ul>
+                    <li><strong>Best Sharpe Ratio improvement:</strong> +15% over the fixed TP baseline</li>
+                    <li><strong>Max Drawdown reduction:</strong> -8% compared to baseline</li>
+                    <li><strong>Win rate:</strong> Slightly lower (-3%), but average win size increased significantly
+                        (+22%)</li>
+                </ul>
+
+                <p>
+                    The reason? ATR naturally adapts to gold's volatility regime. When gold is trending strongly,
+                    ATR expands and gives the trade room to breathe. When volatility compresses, the trailing stop
+                    tightens and locks in profits faster.
+                </p>
+
+                <h3>Percentage: Simple but Inflexible</h3>
+                <p>
+                    The percentage trailing stop at 2-3% performed adequately but couldn't adapt to changing
+                    market conditions. It worked well during steady trends but got chopped up in volatile,
+                    ranging markets. The fixed nature is both its strength (simplicity) and weakness (rigidity).
+                </p>
+
+                <h3>Chandelier Exit: Best for Trend Following</h3>
+                <p>
+                    Interestingly, the Chandelier Exit with a <strong>22-period lookback and 3.0x ATR
+                        multiplier</strong>
+                    performed best on the D1 timeframe with wider EMA combinations (50/200). It captured the most
+                    profit per winning trade of any method — but also had the lowest win rate.
+                </p>
+                <p>
+                    The takeaway: Chandelier is best suited for trend-following strategies on higher timeframes
+                    where you want to ride big moves all the way.
+                </p>
+
+                <h2>What I'm Using Now</h2>
+
+                <p>
+                    Based on this analysis, I've updated my live EAs:
+                </p>
+
+                <ul>
+                    <li><strong>H1/H4 strategies:</strong> ATR trailing stop with 2.5x multiplier</li>
+                    <li><strong>D1 trend-following:</strong> Chandelier Exit (22, 3.0)</li>
+                    <li><strong>Scalping EAs:</strong> Still using fixed TP — scalping exits need to be fast, not
+                        adaptive</li>
+                </ul>
+
+                <blockquote>
+                    <p>
+                        The best trailing stop is the one that matches your strategy's personality.
+                        ATR works for adaptive strategies. Chandelier works for trend riding.
+                        Percentage works for simplicity. Test on YOUR data, on YOUR strategy.
+                    </p>
+                </blockquote>
+
+                <h2>Takeaways for Your Own Testing</h2>
+
+                <ol>
+                    <li><strong>Always compare against a baseline.</strong> Without a baseline (like fixed TP), you
+                        can't know if the trailing stop is actually adding value.</li>
+                    <li><strong>Test across multiple market regimes.</strong> A trailing stop that works in 2024 might
+                        fail in 2025. Use data that covers trending, ranging, and volatile periods.</li>
+                    <li><strong>Risk-adjusted returns matter more than raw returns.</strong> A method that makes 10%
+                        more with 30% more drawdown isn't better. Look at Sharpe ratio, Sortino ratio, and max drawdown
+                        together.</li>
+                    <li><strong>Don't over-optimize parameters.</strong> If your trailing stop only works with an ATR
+                        multiplier of exactly 2.37, it's curve-fitted. Look for wide parameter ranges that produce
+                        stable results.</li>
+                </ol>
+
+                <p>
+                    I'll share more detailed data and possibly the backtesting scripts in a future post.
+                    Follow me on <a href="https://www.tradingview.com/u/bitzuist/#published-scripts"
+                        target="_blank">TradingView</a>
+                    or <a href="https://x.com/aminut" target="_blank">Twitter/X</a> for updates.
+                </p>
+            </article>
+
+            <div class="blog-post-footer">
+                <div class="blog-post-tags">
+                    <span class="tech-tag">Trailing Stops</span>
+                    <span class="tech-tag">ATR</span>
+                    <span class="tech-tag">XAUUSD</span>
+                    <span class="tech-tag">Backtesting</span>
+                </div>
+                <div class="blog-post-share">
+                    <span>Share:</span>
+                    <a href="https://x.com/intent/tweet?text=Trailing+Stops+ATR+vs+Percentage+vs+Chandelier+Exit&url="
+                        target="_blank">𝕏</a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=" target="_blank">in</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Leverage100x. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="https://x.com/aminut" target="_blank" aria-label="Twitter">𝕏</a>
+                    <a href="https://www.youtube.com/@nutleverage100x" target="_blank" aria-label="YouTube">▶</a>
+                    <a href="https://www.linkedin.com/in/kongarttakarn/" target="_blank" aria-label="LinkedIn">in</a>
+                    <a href="https://github.com/nutbitzuist" target="_blank" aria-label="GitHub">⌥</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+
+</html>

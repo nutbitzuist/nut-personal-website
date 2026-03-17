@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>Blog — Leverage100x | Nut (Sarunporn)</title>
+    <meta name="description"
+        content="Thoughts and insights on systems thinking, algorithmic trading, Expert Advisors, and the 100x leverage philosophy." />
+    <meta name="author" content="Sarunporn Kongarttakarn (Nut)" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="blog.css" />
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="container">
+            <a href="../index.html" class="nav-logo">
+                <span class="nav-logo-icon">L×</span>
+                Leverage<span class="text-accent">100x</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="../index.html#about" class="nav-link">About</a>
+                <a href="../index.html#projects" class="nav-link">Projects</a>
+                <a href="index.html" class="nav-link active">Blog</a>
+                <a href="../index.html#trading" class="nav-link">Trading</a>
+                <a href="../index.html#resources" class="nav-link">Resources</a>
+                <a href="../index.html#connect" class="nav-link">Connect</a>
+                <a href="../index.html#connect" class="btn btn-primary nav-cta">Get in Touch</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Blog Listing -->
+    <main class="blog-page">
+        <div class="container">
+            <div class="blog-page-header">
+                <span class="section-label">// Blog</span>
+                <h1 class="section-title">Thoughts & Insights</h1>
+                <p class="section-subtitle">Sharing lessons from 15+ years in finance, algorithmic trading, and building
+                    systems that compound.</p>
+            </div>
+
+            <!-- Category Filters -->
+            <div class="blog-filters">
+                <button class="blog-filter active" data-category="all">All</button>
+                <button class="blog-filter" data-category="systems-thinking">Systems Thinking</button>
+                <button class="blog-filter" data-category="algo-trading">Algo Trading</button>
+                <button class="blog-filter" data-category="trading">Trading</button>
+            </div>
+
+            <!-- Blog Posts -->
+            <div class="blog-list">
+                <a href="systems-not-goals.html" class="blog-list-card" data-category="systems-thinking">
+                    <div class="blog-list-card-content">
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date">Mar 10, 2026</span>
+                            <span class="blog-card-category">Systems Thinking</span>
+                        </div>
+                        <h2>Why I Think in Systems, Not Goals</h2>
+                        <p>Goals give you direction. But systems give you results. After 15 years in markets, I learned
+                            that the process always beats the target. Here's how I redesigned my entire approach to work
+                            and life.</p>
+                        <span class="blog-list-read">Read Article →</span>
+                    </div>
+                </a>
+
+                <a href="running-expert-advisors-6-years.html" class="blog-list-card" data-category="algo-trading">
+                    <div class="blog-list-card-content">
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date">Feb 24, 2026</span>
+                            <span class="blog-card-category">Algo Trading</span>
+                        </div>
+                        <h2>The Reality of Running Expert Advisors for 6 Years</h2>
+                        <p>Most people focus on backtesting results. But real-world EA trading is a different beast.
+                            Here's what I've learned about drawdowns, expectations, and the mindset needed to survive.
+                        </p>
+                        <span class="blog-list-read">Read Article →</span>
+                    </div>
+                </a>
+
+                <a href="trailing-stops-comparison.html" class="blog-list-card" data-category="trading">
+                    <div class="blog-list-card-content">
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date">Feb 08, 2026</span>
+                            <span class="blog-card-category">Trading</span>
+                        </div>
+                        <h2>Trailing Stops: ATR vs Percentage vs Chandelier Exit</h2>
+                        <p>A deep-dive analysis comparing three trailing stop strategies on XAUUSD EMA crossover
+                            systems. Data-driven insights on which method maximizes risk-adjusted returns.</p>
+                        <span class="blog-list-read">Read Article →</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Leverage100x. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="https://x.com/aminut" target="_blank" aria-label="Twitter">𝕏</a>
+                    <a href="https://www.youtube.com/@nutleverage100x" target="_blank" aria-label="YouTube">▶</a>
+                    <a href="https://www.linkedin.com/in/kongarttakarn/" target="_blank" aria-label="LinkedIn">in</a>
+                    <a href="https://github.com/nutbitzuist" target="_blank" aria-label="GitHub">⌥</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script>
+        // Blog category filter
+        document.querySelectorAll('.blog-filter').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.blog-filter').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const cat = btn.dataset.category;
+                document.querySelectorAll('.blog-list-card').forEach(card => {
+                    if (cat === 'all' || card.dataset.category === cat) {
+                        card.style.display = '';
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        requestAnimationFrame(() => {
+                            card.style.transition = 'all 0.4s ease';
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        });
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

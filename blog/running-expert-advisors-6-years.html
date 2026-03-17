@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>The Reality of Running Expert Advisors for 6 Years — Leverage100x</title>
+    <meta name="description"
+        content="Most people focus on backtesting results. But real-world EA trading is a different beast. Here's what I've learned about drawdowns, expectations, and the mindset needed to survive." />
+    <meta name="author" content="Sarunporn Kongarttakarn (Nut)" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="blog.css" />
+</head>
+
+<body>
+
+    <nav class="navbar scrolled" id="navbar">
+        <div class="container">
+            <a href="../index.html" class="nav-logo">
+                <span class="nav-logo-icon">L×</span>
+                Leverage<span class="text-accent">100x</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="../index.html#about" class="nav-link">About</a>
+                <a href="../index.html#projects" class="nav-link">Projects</a>
+                <a href="index.html" class="nav-link active">Blog</a>
+                <a href="../index.html#trading" class="nav-link">Trading</a>
+                <a href="../index.html#resources" class="nav-link">Resources</a>
+                <a href="../index.html#connect" class="nav-link">Connect</a>
+                <a href="../index.html#connect" class="btn btn-primary nav-cta">Get in Touch</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="blog-post-page">
+        <div class="container">
+            <div class="blog-post-header">
+                <a href="index.html" class="blog-post-back">← Back to all articles</a>
+                <div class="blog-card-meta">
+                    <span class="blog-card-date">Feb 24, 2026</span>
+                    <span class="blog-card-category">Algo Trading</span>
+                </div>
+                <h1>The Reality of Running Expert Advisors for 6 Years</h1>
+                <div class="blog-post-meta">
+                    <div class="blog-post-author">
+                        <img src="../profile.webp" alt="Nut" />
+                        <span class="blog-post-author-name">Nut (Sarunporn)</span>
+                    </div>
+                    <span class="blog-post-date">10 min read</span>
+                </div>
+            </div>
+
+            <article class="blog-post-content">
+                <p>
+                    Six years ago, I deployed my first Expert Advisor on a live account. I thought I was prepared.
+                    I had backtested it across 10 years of data. The equity curve looked beautiful.
+                    The Sharpe ratio was excellent. I was ready.
+                </p>
+
+                <p>
+                    I wasn't ready. Not even close. Here's what I've learned since then.
+                </p>
+
+                <h2>Backtesting Is Not Reality</h2>
+
+                <p>
+                    This is the hardest lesson every EA trader learns. <strong>Backtesting gives you confidence.
+                        Live trading gives you humility.</strong>
+                </p>
+
+                <p>
+                    In backtesting, you have perfect order fills. No slippage. No requotes. No server
+                    disconnections at 3 AM when your EA tries to close a position during NFP. The gap between
+                    backtest results and live results is where most EA traders lose their sanity — and their capital.
+                </p>
+
+                <p>
+                    After 6 years, I've learned to expect a <strong>20-30% degradation</strong> from backtest
+                    to live performance. If your backtest shows 50% annual return, plan for 35-40% in reality.
+                    If that's still acceptable, you have a viable strategy. If not, go back to the drawing board.
+                </p>
+
+                <h2>Drawdowns Will Test You</h2>
+
+                <p>
+                    The biggest psychological challenge isn't losses. It's <em>sustained drawdowns</em>.
+                    A bad day is nothing. A bad week is uncomfortable. But a bad month — watching your EA
+                    bleed capital slowly, day after day, while following the rules perfectly? That's where most
+                    people break.
+                </p>
+
+                <blockquote>
+                    <p>
+                        "The market can stay irrational longer than you can stay solvent." — Keynes
+                    </p>
+                </blockquote>
+
+                <p>
+                    I've had drawdowns that lasted 3 months. Three months of watching the account go down,
+                    trusting the math, trusting the system. And then it recovered. Every single time — so far.
+                </p>
+
+                <p>
+                    The key insights about drawdowns:
+                </p>
+
+                <ul>
+                    <li><strong>Size your positions for the worst case.</strong> If your backtest shows a 20% max
+                        drawdown, plan for 40%. Markets will always surprise you with new extremes.</li>
+                    <li><strong>Diversify across strategies.</strong> Multiple uncorrelated EAs smooth the equity curve.
+                        What kills you with one EA might be a non-event across a portfolio.</li>
+                    <li><strong>Set clear rules for intervention.</strong> Define in advance: at what drawdown level do
+                        you pause the EA? At what level do you reduce position size? Don't make these decisions when
+                        you're emotional.</li>
+                </ul>
+
+                <h2>The Infrastructure Matters More Than the Strategy</h2>
+
+                <p>
+                    Beginners obsess over entry signals. Veterans obsess over infrastructure.
+                </p>
+
+                <p>
+                    In 6 years, I've had more losses from <strong>infrastructure failures</strong> than from
+                    bad strategies:
+                </p>
+
+                <ul>
+                    <li>VPS crashes during volatile markets</li>
+                    <li>Broker changing spread widening rules without notice</li>
+                    <li>Internet disconnections causing orphaned positions</li>
+                    <li>MT4/MT5 updates breaking EA compatibility</li>
+                    <li>Timezone changes affecting session-based logic</li>
+                </ul>
+
+                <p>
+                    Today, I run redundant VPS instances across different providers. I have monitoring
+                    dashboards that alert me within seconds of any anomaly. I use multiple brokers to reduce
+                    single-point-of-failure risk. <strong>The boring stuff is what keeps the lights on.</strong>
+                </p>
+
+                <h2>What I Look for in an EA Today</h2>
+
+                <p>
+                    After 6 years of building, testing, deploying, and killing EAs, here's what I prioritize:
+                </p>
+
+                <ol>
+                    <li><strong>Simplicity.</strong> The best EAs have the fewest parameters. If an EA needs 20
+                        optimized inputs to work, it's curve-fitted and will fail in live.</li>
+                    <li><strong>Robustness.</strong> Does it work across multiple pairs? Multiple timeframes? If it only
+                        works on EURUSD H1 with exact parameters, it's fragile.</li>
+                    <li><strong>Reasonable expectations.</strong> I aim for 20-40% annual return with max 15% drawdown.
+                        Not sexy, but sustainable. Over years, that compounds massively.</li>
+                    <li><strong>Risk management first.</strong> The entry signal is maybe 20% of the system. The other
+                        80% is position sizing, stop loss, take profit, and portfolio-level risk controls.</li>
+                </ol>
+
+                <h2>Was It Worth It?</h2>
+
+                <p>
+                    Absolutely. But not for the reasons you might think.
+                </p>
+
+                <p>
+                    The <strong>additional cashflow</strong> is great. Having trading robots that generate income
+                    while I sleep, while I work my day job, while I spend time with family — that's real leverage.
+                </p>
+
+                <p>
+                    But the bigger win is what the process taught me. Building EAs forced me to think in systems.
+                    To be ruthlessly honest about what works and what doesn't. To separate process from outcome.
+                    To be patient. To trust the math over the emotions.
+                </p>
+
+                <p>
+                    Those skills transfer to everything — business, investing, personal development.
+                    The EA is just a vehicle. The real product is the <strong>mindset</strong>.
+                </p>
+            </article>
+
+            <div class="blog-post-footer">
+                <div class="blog-post-tags">
+                    <span class="tech-tag">Expert Advisors</span>
+                    <span class="tech-tag">Algo Trading</span>
+                    <span class="tech-tag">Risk Management</span>
+                </div>
+                <div class="blog-post-share">
+                    <span>Share:</span>
+                    <a href="https://x.com/intent/tweet?text=The+Reality+of+Running+Expert+Advisors+for+6+Years&url="
+                        target="_blank">𝕏</a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=" target="_blank">in</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Leverage100x. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="https://x.com/aminut" target="_blank" aria-label="Twitter">𝕏</a>
+                    <a href="https://www.youtube.com/@nutleverage100x" target="_blank" aria-label="YouTube">▶</a>
+                    <a href="https://www.linkedin.com/in/kongarttakarn/" target="_blank" aria-label="LinkedIn">in</a>
+                    <a href="https://github.com/nutbitzuist" target="_blank" aria-label="GitHub">⌥</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+
+</html>
